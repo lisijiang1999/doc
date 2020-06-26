@@ -1,0 +1,57 @@
+域名： https://www.tiantianpay.co
+接口：
+  1.下单接口 /pay/payChannel/recharge.json
+    请求类型：POST
+    请求参数 ：
+      appId：应用ID
+      merchantId：商户号
+      outTradeNo：商户订单号
+      nonceStr：随机字符串
+      notifyUrl：回调地址
+      unitNameAmount：下单数量（金额需大于100）
+      payType：要求支付类型（CNY提供：1.支付宝，2.微信，3.银联，4.QQ）
+      remark: 订单备注信息
+      sign：签名	（HMAC-SHA256）
+      remark：会员唯一标识（id）
+    输出参数：
+      order_id:
+      url: （支付页面）
+
+  2.回调参数
+    请求类型：POST
+    请求参数 ：
+      appId：应用ID
+      merchantId：商户号
+      outTradeNo：商户订单号
+      orderId: 平台订单号
+      unitAmt: 出售/收购 币种金额
+      payOpt: 支付类型
+      createdTime: 下单时间（时间戳）
+      confirmTime： 完成时间（时间戳）
+      nonceStr： 随机数
+      sign：签名	（HMAC-SHA256）
+
+  3.订单查询接口 /pay/payChannel/orderQuery.json
+    请求类型：POST
+    请求参数 ：
+      appId：应用ID
+      merchantId：商户号
+      nonceStr：随机字符串
+      outTradeNo：商户订单号
+      orderId: 平台订单号
+      sign：签名	（HMAC-SHA256）
+    输出参数：
+      appId：应用ID
+      merchantId：商户号
+      outTradeNo：商户订单号
+      orderId: 平台订单号
+      unitAmt: 出售/收购 币种金额
+      payOpt: 支付类型
+      url: 支付地址
+      createdTime: 下单时间
+      confirmTime： 完成时间
+      orderStatus: 交易状态
+      payType: 订单类型
+      sign：签名	（HMAC-SHA256）
+
+

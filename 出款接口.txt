@@ -1,0 +1,62 @@
+域名： https://www.tiantianpay.co
+接口：
+  1.下单接口 /pay/payChannel/out/order.json
+    请求类型：POST
+    请求参数 ：
+      appId：应用ID
+      merchantId：商户号
+      merchantUserId：商户用户ID
+      outTradeNo：商户订单号
+      nonceStr：随机字符串 （为4位字符串）
+      notifyUrl：回调地址
+      unitNameAmount：下单数量（金额需大于100）
+      payType：要求支付类型（CNY提供：1.银行卡）
+      data : {"realName":"张三", "bankName":"建行", "cardNo":"632211236718273462792" }
+      remark: 订单备注信息
+      sign：签名	（HMAC-SHA256）
+    输出参数：
+      {
+        "msg" : "下单成功"
+        "code" : 200
+        "data" : {"orderId" : "PWC2020120312100000"}
+      }
+
+  2.回调参数
+    请求类型：POST
+    请求参数 ：
+      appId：应用ID
+      merchantId：商户号
+      outTradeNo：商户订单号
+      orderId: 平台订单号
+      unitName: 交易币种名称
+      unitAmt: 币种金额
+      payOpt: 支付类型
+      createdTime: 下单时间（时间戳10位）
+      nonceStr： 随机数
+      sign：签名	（HMAC-SHA256）
+     输出参数：
+      "SUCCESS"
+
+  3.订单查询接口 /pay/payChannel/out/orderQuery.json
+    请求类型：POST
+    请求参数 ：
+      appId：应用ID
+      merchantId：商户号
+      nonceStr：随机字符串
+      outTradeNo：商户订单号
+      orderId: 平台订单号
+      sign：签名	（HMAC-SHA256）
+    输出参数：
+      appId：应用ID
+      merchantId：商户号
+      outTradeNo：商户订单号
+      orderId: 平台订单号
+      unitAmt:  币种金额
+      payOpt: 支付类型
+      createdTime: 下单时间
+      confirmTime： 完成时间
+      orderStatus: 交易状态
+      payType: 订单类型
+      sign：签名	（HMAC-SHA256）
+
+
