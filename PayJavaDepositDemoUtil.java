@@ -116,6 +116,45 @@ public class PayJavaDepositDemoUtil {
     }
   }
 
+  // 回调接参方法
+  public static void callback(HttpServletRequest request) {
+    String appId = request.getParameter("appId"); // 应用ID
+    String merchantId = request.getParameter("merchantId"); // 商户号
+    String outTradeNo = request.getParameter("outTradeNo"); // 商户订单号
+    String orderId = request.getParameter("orderId"); // 平台订单号
+    String unitAmt = request.getParameter("unitAmt"); // 币种金额
+    String payOpt = request.getParameter("payOpt"); // 支付类型 1
+    String createdTime = request.getParameter("createdTime"); // 10时间戳
+    String confirmTime = request.getParameter("confirmTime"); // 10时间戳
+    String nonceStr = request.getParameter("nonceStr"); // 随机数
+    String requestSign = request.getParameter("sign"); // 签名
+
+    Map<String, String> requestData = new HashMap<>();
+    requestData.put("appId", appId);
+    requestData.put("merchantId", merchantId);
+    requestData.put("outTradeNo", outTradeNo);
+    requestData.put("orderId", orderId);
+    requestData.put("unitAmt", unitAmt);
+    requestData.put("payOpt", payOpt);
+    requestData.put("createdTime", createdTime);
+    requestData.put("confirmTime", confirmTime);
+    requestData.put("nonceStr", nonceStr);
+
+    // 签名工具 签名参数
+    String sign = generateSignature(requestData, "23478dc22bdd6fdc718daa099f64d4a3");
+
+    // 判断requestSign 与 自己的签名 sign 是否正确
+    if (requestSign.equals(sign)) {
+      // 正确
+      // 处理订单逻辑
+    } else {
+      // 错误
+    }
+
+  }
+
+
+
   /**
    * 生成签名. 注意，若含有sign_type字段，必须和signType参数保持一致。
    *
@@ -182,10 +221,6 @@ public class PayJavaDepositDemoUtil {
     }
 
     return sb.toString().toUpperCase();
-  }
-
-  public static void main(String[] args) throws Exception {
-
   }
 
 }
