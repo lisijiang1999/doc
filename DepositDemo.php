@@ -46,7 +46,7 @@
     return $sign;
   };
 
-  // 请求 接口
+  // 请求下单接口
   function httpPost($url, $urlParamMap, $appSecret) {
       $curl = curl_init(); //初始化
       curl_setopt($curl, CURLOPT_URL, $url); //设置抓取的url
@@ -69,7 +69,32 @@
       return $data; //返回获得的数据
   };
 
+  // 回调接参方法
+  function callback($_POST, $appSecret) {
+      // 回调参数
+      $requestParamMap = [
+        "appId" => $_POST['appId'],
+        "merchantId" => $_POST['merchantId'],
+        "outTradeNo" => $_POST['outTradeNo'], // 商户订单号
+        "orderId" => $_POST['orderId'], // 平台订单号
+        "unitAmt" => $_POST['unitAmt'], // 币种金额
+        "payOpt" => $_POST['payOpt'], // 支付类型 1
+        "createdTime" => $_POST['createdTime'], // 10时间戳
+        "confirmTime" => $_POST['confirmTime'], // 10时间戳
+        "nonceStr" => $_POST['nonceStr'], // 随机数
+      ];
+
+      // 签名
+      $sign = generateSignature($requestParamMap, $appSecret);
+
+      $requestSign = request.getParameter("sign"); // 签名
+
+      if (strcmp($requestSign, $sign) == 0) {
+        // 相等  处理订单
+      }
+
+  };
+
   echo httpPost($rechargeUrlAddress, $urlParamMap, $appSecret);
 
 ?>
-
