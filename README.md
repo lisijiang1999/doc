@@ -25,6 +25,3 @@
 
 #### 出款
 
-
-## bigmouth996@outlook.com
-Aa123456789
